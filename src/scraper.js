@@ -10,6 +10,8 @@ puppeteer.use(StealthPlugin());
     });
     
     const page = await fanDuel_browser.newPage();
+
+    //set page view port which allows the bot to work like it is in full screen mode
     page.setViewport({ width: 1900, height: 1080 });
 
     await page.goto('https://sportsbook.fanduel.com');
@@ -17,7 +19,7 @@ puppeteer.use(StealthPlugin());
     await page.waitForTimeout(3000);
 
 
-    // Example: Clicking an <a> element containing the word "Soccer" in its title
+    // Click search bar
     let linkSelector = 'a[aria-label="Search"]'; // Using the attribute selector with the substring match
     await page.waitForSelector(linkSelector);
     await page.click(linkSelector);
@@ -35,7 +37,7 @@ puppeteer.use(StealthPlugin());
 
     await page.waitForTimeout(2000);
 
-
+    //Select Bet 
     linkSelector = 'div[aria-label*="Lakers,"][aria-label*=","][aria-label*=","]'; // Using the attribute selector with the substring match
     await page.waitForSelector(linkSelector);
     await page.click(linkSelector);
@@ -46,6 +48,7 @@ puppeteer.use(StealthPlugin());
 
     const inputHandles = await page.$$('input');
 
+    //Input bet
     // Check if there is at least a second input element
     if (inputHandles.length >= 2) {
       textToType = '100';
@@ -63,14 +66,14 @@ puppeteer.use(StealthPlugin());
     }
 
 
-    // Example: Clicking an <a> element containing the word "Soccer" in its title
+    // Click Search 
     linkSelector = 'a[aria-label="Search"]'; // Using the attribute selector with the substring match
     await page.waitForSelector(linkSelector);
     await page.click(linkSelector);
 
     await page.waitForTimeout(3000);
 
-    //Continuing with FanDuel
+    //Click Login
     let textToFind = 'Log in or join';
     const [login] = await page.$x(`//span[text()="${textToFind}"]`);
 
@@ -92,7 +95,6 @@ puppeteer.use(StealthPlugin());
       });
   
       const espn_page = await espn_browser.newPage();
-      await espn_page.keyboard.press('F11');
       
       //Go to page 
       await espn_page.goto('https://espnbet.com/');
@@ -100,7 +102,7 @@ puppeteer.use(StealthPlugin());
       await espn_page.waitForTimeout(5000);
   
   
-      // Example: Clicking an <a> element containing the word "Soccer" in its title
+      // Click the search bar 
       let espnLinkSelector = 'input[aria-invalid="false"][aria-label="Search Sportsbook"]'; // Using the attribute selector with the substring match
       await espn_page.waitForSelector(espnLinkSelector);
       await espn_page.click(espnLinkSelector);
