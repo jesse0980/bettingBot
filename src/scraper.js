@@ -66,13 +66,6 @@ puppeteer.use(StealthPlugin());
     }
 
 
-    // Click Search 
-    linkSelector = 'a[aria-label="Search"]'; // Using the attribute selector with the substring match
-    await page.waitForSelector(linkSelector);
-    await page.click(linkSelector);
-
-    await page.waitForTimeout(3000);
-
     //Click Login
     let textToFind = 'Log in or join';
     const [login] = await page.$x(`//span[text()="${textToFind}"]`);
